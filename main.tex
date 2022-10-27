@@ -1,6 +1,7 @@
 \documentclass{sbrt}
 \usepackage[english,brazil]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath}
 \usepackage{natbib}
 \newtheorem{theorem}{Teorema}
 
@@ -8,7 +9,7 @@
 
 \begin{document}
 
-\title{Autotune: como funciona a alteração do tom da voz}
+\title{Autotune: como funciona a harmonização da voz humana}
 
 \author{Carlos E. P. Silva, Gabriel M. Silvério, Geovanne B. Lopes, Matheus B. Frate}
 
@@ -17,47 +18,44 @@
 %% ---------------------------------------------
 
 \begin{resumo}
-Autotune é um software que permite aos usuários alterar o tom da sua voz. O autotune usa um algoritmo para analisar o
-sinal de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o sinal. Este artigo tem como
-objetivo explicar como funciona autotune e como ele pode ser usado para processar sinais de voz humana.
+O Autotune é um software que permite aos usuários alterar o tom de sua voz utilizando um algoritmo que analisa o sinal de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o tom desejado. Este artigo tem como objetivo explicar como funciona a harmonização da voz humana.
 \end{resumo}
 \begin{chave}
-Autotune, software, voz, tom, instrumentos musicais, algoritmo, harmonia
+Autotune, algoritmo, análise de sinal, equalização, filtragem, tom
 \end{chave}
 
 %% ---------------------------------------------
 
 \begin{abstract}
-Autotune is a software that allows users to change the pitch of their voice. It was originally developed to adjust the
-pitch of musical instruments, but can also be used to process human voice signals. Autotune uses an algorithm to analyze
-the audio signal and then adjusts the pitch of the voice to be in harmony with the signal. The purpose of this article
-is to explain how autotune works and how it can be used to process human voice signals.
+Autotune is a software that allows users to change the pitch of their voice using an algorithm that analyzes the audio signal and then adjusts the pitch of the voice to be in harmony with the desired pitch. The purpose of this article is to explain how voice harmony works.
 \end{abstract}
 \begin{keywords}
-Autotune, software, voice, pitch, musical instruments, algorithm, harmony
+Autotune, algorithm, signal analysis, equalization, filtering, pitch
 \end{keywords}
 
 %% ---------------------------------------------
 
 \section{Introdução}
 
-O auto-tune está extensivamente entrelaçado na cena musical da atual geração de músicos~\cite{diaz2009fate}. Com isso
-surge o questionamento: como o algoritmo do auto-tune funciona?
+O auto-tune é um software que usa um algoritmo para processar sinais de voz humana. Ele analisa o sinal de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o sinal. O auto-tune pode ser usado para ajustar o tom da voz para qualquer tom, mas é mais comumente usado para ajustar o tom da voz para o tom de um instrumento musical~\cite{browning2014auto}.
 
-O primeiro passo para compreender o funcionamento do algoritmo é aprender o que é o processamento de sinais. Em termos
-gerais, o processamento de sinais é o processo de analisar e manipular um sinal para extrair informações úteis ou para
-alterar o sinal de alguma forma. Um sinal pode ser qualquer coisa, desde um som até um gráfico de um fenômeno físico. O
-processamento de sinais pode ser feito de forma analógica ou digital. O processamento de sinais analógicos é feito
-usando circuitos eletrônicos, enquanto o processamento de sinais digitais é feito usando algoritmos e
-computadores~\cite{prandoni2008signal}.
+O auto-tune está extensivamente entrelaçado na cena musical da atual geração de músicos~\cite{diaz2009fate}. Com isso surge o questionamento: como o algoritmo do auto-tune funciona?
 
-O auto-tune é um software que usa um algoritmo para processar sinais de voz humana. Ele analisa o sinal de áudio e, em
-seguida, ajusta o tom da voz para que ele esteja em harmonia com o sinal. O auto-tune pode ser usado para ajustar o tom
-da voz para qualquer tom, mas é mais comumente usado para ajustar o tom da voz para o tom de um instrumento
-musical~\cite{browning2014auto}.
+O primeiro passo para compreender o funcionamento do algoritmo é aprender o que é o processamento de sinais. Em termos gerais, o processamento de sinais é o processo de analisar e manipular um sinal para extrair informações úteis ou para alterar o sinal de alguma forma. Um sinal pode ser qualquer coisa, desde um som até um gráfico de um fenômeno físico. O processamento de sinais pode ser feito de forma analógica ou digital. O processamento de sinais analógicos é feito usando circuitos eletrônicos, enquanto o processamento de sinais digitais é feito usando algoritmos e computadores~\cite{prandoni2008signal}.
 
-\begin{quote} ``Por exemplo, se a frequência da voz estiver em 435 Hz a voz está desafinada, pois não existe um tom
-nessa frequência, então ajusta-se para o tom mais próximo, que é Lá de 440 H``~\cite{deimplementaccao}. \end{quote}
+\begin{quote} ``Por exemplo, se a frequência da voz estiver em 435 Hz a voz está desafinada, pois não existe um tom nessa frequência, então ajusta-se para o tom mais próximo, que é Lá de 440 H``~\cite{deimplementaccao}. \end{quote}
+
+%% ---------------------------------------------
+
+\section{Fundamentação}
+
+Lorem ipsum.
+
+%% ---------------------------------------------
+
+\section{Desenvolvimento}
+
+Lorem ipsum.
 
 %% ---------------------------------------------
 

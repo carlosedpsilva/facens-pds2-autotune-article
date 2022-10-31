@@ -6,6 +6,7 @@
 \usepackage{natbib}
 \usepackage{pgfplots}
 \newtheorem{theorem}{Teorema}
+\pgfplotsset{compat=1.18}
 
 %% ---------------------------------------------
 
@@ -20,9 +21,7 @@
 %% ---------------------------------------------
 
 \begin{resumo}
-  O Autotune é um software que permite aos usuários alterar o tom de sua voz utilizando um algoritmo que analisa o sinal
-  de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o tom desejado. Este artigo tem como
-  objetivo explicar como funciona a harmonização da voz humana.
+  O Autotune é um software que permite aos usuários alterar o tom de sua voz utilizando um algoritmo que analisa o sinal de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o tom desejado. Este artigo tem como objetivo explicar como funciona a harmonização da voz humana.
 \end{resumo}
 \begin{chave}
   Autotune, algoritmo, análise de sinal, equalização, filtragem, tom
@@ -31,9 +30,7 @@
 %% ---------------------------------------------
 
 \begin{abstract}
-  Autotune is a software that allows users to change the pitch of their voice using an algorithm that analyzes the audio
-  signal and then adjusts the pitch of the voice to be in harmony with the desired pitch. The purpose of this article is
-  to explain how voice harmony works.
+  Autotune is a software that allows users to change the pitch of their voice using an algorithm that analyzes the audio signal and then adjusts the pitch of the voice to be in harmony with the desired pitch. The purpose of this article is to explain how voice harmony works.
 \end{abstract}
 \begin{keywords}
   Autotune, algorithm, signal analysis, equalization, filtering, pitch
@@ -43,19 +40,11 @@
 
 \section{Introdução}
 
-O auto-tune é um software que usa um algoritmo para processar sinais de voz humana. Ele analisa o sinal de áudio e, em
-seguida, ajusta o tom da voz para que ele esteja em harmonia com o sinal. A ferramenta está extensivamente entrelaçada
-na cena musical da atual geração de músicos~\cite{diaz2009fate}.
+O auto-tune é um software que usa um algoritmo para processar sinais de voz humana. Ele analisa o sinal de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o sinal. A ferramenta está extensivamente entrelaçada na cena musical da atual geração de músicos~\cite{diaz2009fate}.
 
-Há várias razões pelas quais os músicos podem optar por usar autotune para ajustar o tom de sua música.
-Segundo~\cite{browning2014auto}, em primeiro lugar, o autotune pode ajudar a manter os instrumentos em sincronia, o que
-é especialmente importante para os músicos que tocam em ensemble\footnote{Ensemble é um termo musical que se refere a um
-grupo de instrumentos ou vozes que tocam ou cantam juntos.}. Em segundo lugar, o autotune pode ser usado para corrigir
-erros de afinação, permitindo que os músicos toquem com mais precisão. Por fim, o autotune pode ser usado para criar
-efeitos especiais de som, como vibrato e sustenido.
+Há várias razões pelas quais os músicos podem optar por usar autotune para ajustar o tom de sua música. Segundo~\cite{browning2014auto}, em primeiro lugar, o autotune pode ajudar a manter os instrumentos em sincronia, o que é especialmente importante para os músicos que tocam em ensemble\footnote{Ensemble é um termo musical que se refere a um grupo de instrumentos ou vozes que tocam ou cantam juntos.}. Em segundo lugar, o autotune pode ser usado para corrigir erros de afinação, permitindo que os músicos toquem com mais precisão. Por fim, o autotune pode ser usado para criar efeitos especiais de som, como vibrato e sustenido.
 
-Este trabalho busca analisar especifcamente o processo de harmonização da voz através de um algoritmo feito em Python, o
-qual exemplificará e elucidará o tratamento necessário para harmonização do tom através dos dados obtidos.
+Este trabalho busca analisar especifcamente o processo de harmonização da voz através de um algoritmo feito em Python, o qual exemplificará e elucidará o tratamento necessário para harmonização do tom através dos dados obtidos.
 
 %% ---------------------------------------------
 
@@ -63,63 +52,31 @@ qual exemplificará e elucidará o tratamento necessário para harmonização do
 
 \subsection{Processamento de Sinais}
 
-O primeiro passo para compreender o funcionamento do algoritmo é entender o que são sinais e como podem ser processados.
-Conforme~\cite{prandoni2008signal}, em termos gerais, é o processo de analisar e manipular um sinal para extrair
-informações úteis ou para alterar o sinal de alguma forma. Um sinal pode ser qualquer coisa, desde um som até um gráfico
-de um fenômeno físico. O processamento de sinais pode ser feito de forma analógica utilizando circuitos eletrônicos ou
-digital utilizando algoritmos e computadores.
+O primeiro passo para compreender o funcionamento do algoritmo é entender o que são sinais e como podem ser processados. Conforme~\cite{prandoni2008signal}, em termos gerais, é o processo de analisar e manipular um sinal para extrair informações úteis ou para alterar o sinal de alguma forma. Um sinal pode ser qualquer coisa, desde um som até um gráfico de um fenômeno físico. O processamento de sinais pode ser feito de forma analógica utilizando circuitos eletrônicos ou digital utilizando algoritmos e computadores.
 
 \subsection{Notas Musicais}
 
-Segundo~\cite{moretti2003prototipo}, notas musicais são os sons emitidos por instrumentos musicais ou vozes que, em
-conjunto, formam uma melodia ou uma composição. As notas musicais são classificadas por sua altura ou frequência. A
-frequência é a medida da velocidade de vibração de um som e é medida em hertz (Hz). Quanto maior a frequência, mais
-agudo é o som. A Figura 1 representa dois sinais de diferentes frequências. O sinal representado pelo traço mais cheio
-tem a metade da frequência do outro.
+Segundo~\cite{moretti2003prototipo}, notas musicais são os sons emitidos por instrumentos musicais ou vozes que, em conjunto, formam uma melodia ou uma composição. As notas musicais são classificadas por sua altura ou frequência. A frequência é a medida da velocidade de vibração de um som e é medida em hertz (Hz). Quanto maior a frequência, mais agudo é o som. A Figura 1 representa dois sinais de diferentes frequências. O sinal representado pelo traço mais cheio tem a metade da frequência do outro.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
-    \begin{axis}[
-        xlabel=Tempo,
-        ylabel=Amplitude,
-        xlabel style={anchor=west, at={(axis description cs:1,0.15)}},
-        ylabel style={anchor=south, at={(axis description cs:0.3,1)}, rotate=-90},
-        width=.45\textwidth, height=5cm,
-        domain=-0:2*pi, samples=50, smooth,
-        ymin=-1, ymax=1,
-        axis lines=left,
-        axis line style={->},
-        xtick=\empty,
-        ytick=\empty,
-        grid=none,
-        x tick label style = {black},
-        enlargelimits={abs=0.2}
-      ]
-      \addplot[mark=none]{sin(deg(2*pi*x))};
-      \addplot[mark=none, style={line width=1.5pt}]{sin(deg(pi*x))};
+    \begin{axis}[ xlabel=Tempo, ylabel=Amplitude, xlabel style={anchor=west, at={(axis description cs:1,0.15)}}, ylabel style={anchor=south, at={(axis description cs:0.3,1)}, rotate=-90}, width=.45\textwidth, height=5cm, domain=-0:2*pi, samples=50, smooth, ymin=-1, ymax=1, axis lines=left, axis line style={->}, xtick=\empty, ytick=\empty, grid=none, x tick label style = {black}, enlargelimits={abs=0.2} ] \addplot[mark=none]{sin(deg(2*pi*x))}; \addplot[mark=none, style={line width=1.5pt}]{sin(deg(pi*x))};
     \end{axis}
   \end{tikzpicture}
   \caption{\label{fig:sine}Diferentes frequências.}
 \end{figure}
 
-Conforme~\cite{moretti2003prototipo} elucida, a notação musical define sete notas naturais: Dó, Ré, Mi, Fá, Sol, Lá e
-Si. Elas são denominadas notas naturais, pois formam a base de todas as escalas e harmonia musical. Por sua vez oitava é
-o espaço entre a primeira nota de uma escala e a oitava nota, e é considerada a maior unidade de som musical.
+Conforme~\cite{moretti2003prototipo} elucida, a notação musical define sete notas naturais: Dó, Ré, Mi, Fá, Sol, Lá e Si. Elas são denominadas notas naturais, pois formam a base de todas as escalas e harmonia musical. Por sua vez oitava é o espaço entre a primeira nota de uma escala e a oitava nota, e é considerada a maior unidade de som musical.
 
 \begin{quote}
-  ``Oitava é o espaço musical que compreende duas notas de mesmo nome, mas de alturas diferentes. Por exemplo, uma
-  oitava é o espaço entre uma nota dó a próxima nota dó na escala, mais aguda que a
-  primeira''~\cite{moretti2003prototipo}.
+  ``Oitava é o espaço musical que compreende duas notas de mesmo nome, mas de alturas diferentes. Por exemplo, uma oitava é o espaço entre uma nota dó a próxima nota dó na escala, mais aguda que a primeira''~\cite{moretti2003prototipo}.
 \end{quote}
 
-Ainda de acordo com o autor citado~\cite{moretti2003prototipo}, define-se que a frequência do som é a mesma que a altura do som ou tom. A altura do
-som depende da frequência do som, que é a velocidade de vibração das ondas sonoras. A frequência do som é determinada
-pelo número de vibrações que as ondas sonoras fazem por segundo. Quanto maior for a frequência, mais alta será a
-altura. A tabela~\ref{tab:freq} mostra a relação entre a frequência e a altura do som.
+Ainda de acordo com o autor citado~\cite{moretti2003prototipo}, define-se que a frequência do som é a mesma que a altura do som ou tom. A altura do som depende da frequência do som, que é a velocidade de vibração das ondas sonoras. A frequência do som é determinada pelo número de vibrações que as ondas sonoras fazem por segundo. Quanto maior for a frequência, mais alta será a altura. A tabela~\ref{tab:freq} mostra a relação entre a frequência e a altura do som.
 
-\begin{table}[h]
+\begin{table}[ht]
   \centering
   \caption{\label{tab:freq} Notas Musicais}
   \vspace{-0.2cm}
@@ -138,25 +95,18 @@ altura. A tabela~\ref{tab:freq} mostra a relação entre a frequência e a altur
 
 \subsection{Transformada Rápida de Fourier}
 
-A transformada rápida de Fourier (FFT), é um metodo que  converte um sinal em componentes espectrais individuais para
-fornecer a frequência do sinal.
+A transformada rápida de Fourier (FFT), é um metodo que  converte um sinal em componentes espectrais individuais para fornecer a frequência do sinal.
 
-Desenvolvido em 1965 por  J. W. Cooley (IBM) e J. W. Tukey (Bell Labs), teve como objetivo principal otimizar a
-utilização da Transformada Discreta de Fourier (DTF), para que fosse executada de forma mais rápida e com um trabalho
-computacional reduzido~\cite{martins2016analise}.
+Desenvolvido em 1965 por  J. W. Cooley (IBM) e J. W. Tukey (Bell Labs), teve como objetivo principal otimizar a utilização da Transformada Discreta de Fourier (DTF), para que fosse executada de forma mais rápida e com um trabalho computacional reduzido~\cite{martins2016analise}.
 
-Enquanto a implementação do DTF possuiam um custo computacional de $O(N^2)$ com a implementação do FFT o custo foi
-reduzido para $O(N \log_2{N})$. A FFT mudou o uso de polinômios trigonométricos interpolatórios, organizando de forma
-que o número de pontos usados pode ser fatorado em potências de dois, dessa forma, sua utilização é mais eficiente por
-ser mais rápida e por realizar o cálculo da DFT e também sua inversa~\cite{reis2008implementaccao}.
+Enquanto a implementação do DTF possuiam um custo computacional de $O(N^2)$ com a implementação do FFT o custo foi reduzido para $O(N \log_2{N})$. A FFT mudou o uso de polinômios trigonométricos interpolatórios, organizando de forma que o número de pontos usados pode ser fatorado em potências de dois, dessa forma, sua utilização é mais eficiente por ser mais rápida e por realizar o cálculo da DFT e também sua inversa~\cite{reis2008implementaccao}.
 
 %% ---------------------------------------------
 
 \section{Desenvolvimento}
 
 \begin{quote}
-  ``Por exemplo, se a frequência da voz estiver em 435 Hz a voz está desafinada, pois não existe um tom nessa
-  frequência, então ajusta-se para o tom mais próximo, que é Lá de 440 H''~\cite{deimplementaccao}.
+  ``Por exemplo, se a frequência da voz estiver em 435 Hz a voz está desafinada, pois não existe um tom nessa frequência, então ajusta-se para o tom mais próximo, que é Lá de 440 H''~\cite{deimplementaccao}.
 \end{quote}
 
 %% ---------------------------------------------

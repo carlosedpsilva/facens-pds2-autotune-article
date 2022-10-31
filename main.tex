@@ -24,7 +24,7 @@
   O Autotune é um software que permite aos usuários alterar o tom de sua voz utilizando um algoritmo que analisa o sinal de áudio e, em seguida, ajusta o tom da voz para que ele esteja em harmonia com o tom desejado. Este artigo tem como objetivo explicar como funciona a harmonização da voz humana.
 \end{resumo}
 \begin{chave}
-  Autotune, algoritmo, análise de sinal, equalização, filtragem, tom
+  Autotune, algoritmo, análise de sinal, equalização, filtragem, tom \hfill \break
 \end{chave}
 
 %% ---------------------------------------------
@@ -62,7 +62,25 @@ Segundo~\cite{moretti2003prototipo}, notas musicais são os sons emitidos por in
 \begin{figure}[ht]
   \centering
   \begin{tikzpicture}
-    \begin{axis}[ xlabel=Tempo, ylabel=Amplitude, xlabel style={anchor=west, at={(axis description cs:1,0.15)}}, ylabel style={anchor=south, at={(axis description cs:0.3,1)}, rotate=-90}, width=.45\textwidth, height=5cm, domain=-0:2*pi, samples=50, smooth, ymin=-1, ymax=1, axis lines=left, axis line style={->}, xtick=\empty, ytick=\empty, grid=none, x tick label style = {black}, enlargelimits={abs=0.2} ] \addplot[mark=none]{sin(deg(2*pi*x))}; \addplot[mark=none, style={line width=1.5pt}]{sin(deg(pi*x))};
+    \begin{axis}[ xlabel=Tempo,
+        ylabel=Amplitude,
+        xlabel style={anchor=west, at={(axis description cs:1,0)}},
+        ylabel style={anchor=south, at={(axis description cs:0.15,1)}, rotate=-90},
+        width=.45\textwidth,
+        height=5cm,
+        domain=-0:2*pi,
+        samples=50,
+        smooth,
+        ymin=-1,
+        ymax=1,
+        axis lines=left,
+        axis line style={->},
+        xtick=\empty,
+        ytick=\empty,
+        grid=none,
+        x tick label style = {black},
+        enlargelimits={abs=0.2}
+      ] \addplot[mark=none]{sin(deg(2*pi*x))}; \addplot[mark=none, style={line width=1.5pt}]{sin(deg(pi*x))};
     \end{axis}
   \end{tikzpicture}
   \caption{\label{fig:sine}Diferentes frequências.}
